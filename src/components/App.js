@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+
 import { api } from "../utils/api.js";
 
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import Login from "./Login";
+import Register from "./Register.js";
 
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
@@ -26,6 +30,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", about: "", avatar: defaultAvatarPic });
   //важно указать у currentUser начальные значения name, about,
   //иначе реакт будет ругаться про начальные значения null или undefined для управляемых инпутов
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const [isLoading, setLoading] = useState(false);
 
@@ -161,17 +166,37 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__container">
-          <Header />
-          <Main
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onDeleteBtnClick={handleDeletBtnClick}
-            onCardDelete={handleCardDelete}
-            cards={cards}
-          />
+          <Header loggedIn={loggedIn} />
+
+          <Routes>
+            <Route
+              path="/"
+              element={
+                loggedIn ? (
+                  <Main
+                    loggedIn={loggedIn}
+                    onEditAvatar={handleEditAvatarClick}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    onDeleteBtnClick={handleDeletBtnClick}
+                    onCardDelete={handleCardDelete}
+                    cards={cards}
+                  />
+                ) : (
+                  <Navigate to="/sign-in" replace />
+                )
+              }
+            />
+
+            <Route path="/sign-in" element={<Login />} />
+
+            <Route path="/sign-up" element={<Register />} />
+
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+
           <Footer />
         </div>
 

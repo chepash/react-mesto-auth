@@ -1,0 +1,10 @@
+.button_color_white {
+  background-color: #fff;
+  border: 1px solid #fff;
+
+  color: #000;
+}
+
+.button_color_white:hover {
+  opacity: 0.85;
+}

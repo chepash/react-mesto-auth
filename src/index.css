@@ -39,13 +39,20 @@
 
 /* формы */
 @import url(./blocks/form/form.css);
+@import url(./blocks/form/_type/form_type_account.css);
 @import url(./blocks/form/__title/form__title.css);
+@import url(./blocks/form/__title/_type/form__title_type_account.css);
 @import url(./blocks/form/__inputs-container/form__inputs-container.css);
+@import url(./blocks/form/__inputs-container/_type/form__inputs-container_type_account.css);
 @import url(./blocks/form/__input-wrap/form__input-wrap.css);
 @import url(./blocks/form/__input/form__input.css);
 @import url(./blocks/form/__input/_type/form__input_type_error.css);
+@import url(./blocks/form/__input/_type/form__input_type_account.css);
 @import url(./blocks/form/__error/form__error.css);
 @import url(./blocks/form/__error/_visible/form__error_visible.css);
+@import url(./blocks/form/__error/_type/form__error_type_account.css);
+@import url(./blocks/form/__text/form__text.css);
+@import url(./blocks/form/__link/form__link.css);
 
 /* кнопки */
 @import url(./blocks/button/button.css);
@@ -58,6 +65,7 @@
 @import url(./blocks/button/_type/button_type_submit.css);
 @import url(./blocks/button/_disabled/button_disabled.css);
 @import url(./blocks/button/_type/button_type_close.css);
+@import url(./blocks/button/_color/button_color_white.css);
 
 /* блок для обнуления стилей и задавания геомерии нектоторым секциям */
 @import url(./blocks/section/section.css); /*box-sizing: border-box*/
@@ -69,3 +77,7 @@
 @import url(./blocks/page/__list/page__list.css); /*переопредеяем стили всех возможных списков*/
 @import url(./blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content */
 @import url(./blocks/popup/__close/popup__close.css); /* позиционирование кнопки close */
+
+/* * {
+  outline: 1px solid #f00 !important;
+} */

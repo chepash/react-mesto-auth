@@ -11,6 +11,7 @@ function Main({
   onCardLike,
   onCardDelete,
   onDeleteBtnClick,
+  loggenIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
