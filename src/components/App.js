@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import { api } from "../utils/api.js";
+import * as authApi from "../utils/authApi.js";
 
 import Header from "./Header";
 import Main from "./Main";
@@ -205,7 +206,7 @@ function App() {
           </Routes>
         </div>
 
-        <InfoTooltip isOpen={true} onClose={closeAllPopups} />
+        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} />
 
         <RenderLoadingContext.Provider value={isLoading}>
           <EditProfilePopup
