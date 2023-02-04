@@ -3,9 +3,7 @@ import PopupWithForm from "./PopupWithForm";
 import successLogo from "../images/sign-up_success.svg";
 import failLogo from "../images/sign-up_fail.svg";
 
-function InfoTooltip({ isOpen, onClose }) {
-  const isRegOk = false;
-
+function InfoTooltip({ isOpen, isRegOk, onClose }) {
   const handleEscClose = (e) => {
     if (e.key === "Escape") {
       onClose();
@@ -29,7 +27,9 @@ function InfoTooltip({ isOpen, onClose }) {
   return (
     <section
       className={`popup section ${isOpen ? "popup_opened" : ""}`}
-      // aria-label={`${ariaLable}`}
+      aria-label={
+        isRegOk ? "Всплывающее окно: Регистрация успешна" : "Всплывающее окно: Что-то пошло не так"
+      }
       onClick={handlePopupOverlayClick}>
       <button
         type="button"
@@ -37,13 +37,18 @@ function InfoTooltip({ isOpen, onClose }) {
         className="button button_type_close popup__close"
         onClick={onClose}></button>
       <div className="popup__container">
-        <img src={isRegOk ? successLogo : failLogo} alt="Логотип" className="popup__logo" />
-        <h2 className="popup__text">
-          {isRegOk
-            ? "Вы успешно зарегистрировались!"
-            : `Что-то пошло не так!
-            Попробуйте ещё раз.`}
-        </h2>
+        {isRegOk && (
+          <>
+            <img src={successLogo} alt="Логотип" className="popup__logo" />
+            <h2 className="popup__text">Вы успешно зарегистрировались!</h2>
+          </>
+        )}
+        {!isRegOk && (
+          <>
+            <img src={failLogo} alt="Логотип" className="popup__logo" />
+            <h2 className="popup__text">Что-то пошло не так! Попробуйте ещё раз.</h2>
+          </>
+        )}
       </div>
     </section>
   );

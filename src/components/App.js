@@ -27,7 +27,8 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isPopupWithImageOpen, setPopupWithImageOpen] = useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
-  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+
+  const [isInfoTooltipState, setInfoTooltipState] = useState({ isOpen: false, isRegOk: false });
 
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -40,16 +41,29 @@ function App() {
 
   const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getCardList()])
-      .then(([user, cards]) => {
-        setCurrentUser(user);
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
-      });
-  }, []);
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   Promise.all([api.getUserInfo(), api.getCardList()])
+  //     .then(([user, cards]) => {
+  //       setCurrentUser(user);
+  //       setCards(cards);
+  //     })
+  //     .catch((err) => {
+  //       console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
+  //     });
+  // }, []);
+
+  function handleRegister({ email, password }) {
+    return authApi.register(email, password).then(() => {
+      handleShowInfoTooltip(true);
+      navigate("/login");
+    });
+  }
+
+  function handleShowInfoTooltip(isRegOk) {
+    setInfoTooltipState({ isOpen: true, isRegOk: isRegOk });
+  }
 
   function handleCardLike(currentCard) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -113,7 +127,7 @@ function App() {
     setEditAvatarPopupOpen(false);
     setPopupWithImageOpen(false);
     setConfirmationPopupOpen(false);
-    setInfoTooltipOpen(false);
+    setInfoTooltipState({ ...isInfoTooltipState, isOpen: false });
     setSelectedCard({});
   }
 
@@ -200,13 +214,25 @@ function App() {
 
             <Route path="/sign-in" element={<Login />} />
 
-            <Route path="/sign-up" element={<Register />} />
+            <Route
+              path="/sign-up"
+              element={
+                <Register
+                  handleRegister={handleRegister}
+                  handleShowInfoTooltip={handleShowInfoTooltip}
+                />
+              }
+            />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
 
-        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} />
+        <InfoTooltip
+          isOpen={isInfoTooltipState.isOpen}
+          isRegOk={isInfoTooltipState.isRegOk}
+          onClose={closeAllPopups}
+        />
 
         <RenderLoadingContext.Provider value={isLoading}>
           <EditProfilePopup

@@ -6,11 +6,20 @@ import Input from "./Input";
 
 import { useFormWithValidation } from "./useFormWithValidation";
 
-function Register() {
+function Register({ handleRegister, handleShowInfoTooltip }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log("values : ", values);
+    handleRegister(values)
+      .then(() => {
+        // setMessage("");
+      })
+      .catch((error) => {
+        handleShowInfoTooltip(false);
+        console.log("error : ", error);
+      });
   }
   return (
     <main className="content section section_size_narrow page__content">
@@ -19,7 +28,7 @@ function Register() {
         method="get"
         onSubmit={handleSubmit}
         className="form form_type_account"
-        name={`form_type_login`}
+        name={`form_type_email`}
         noValidate>
         <h2 className="form__title form__title_type_account">Регистрация</h2>
 
@@ -27,13 +36,13 @@ function Register() {
           <Input
             type="email"
             placeholder="Email"
-            value={values.login || ""}
-            error={errors.login}
+            value={values.email || ""}
+            error={errors.email}
             onChange={handleChange}
-            name="login"
+            name="email"
             additionalClassName="form__input_type_account"
             additionalErrorClassName="form__error_type_account"
-            minLength="2"
+            minLength="3"
             maxLength="40"
             required
           />
