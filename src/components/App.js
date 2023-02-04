@@ -15,6 +15,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import defaultAvatarPic from "../images/default_profile_pic.jpg";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmationPopup from "./ConfirmationPopup";
+import InfoTooltip from "./InfoTooltip";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { RenderLoadingContext } from "../contexts/RenderLoadingContext";
@@ -25,6 +26,8 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isPopupWithImageOpen, setPopupWithImageOpen] = useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+
   const [selectedCard, setSelectedCard] = useState({});
 
   const [currentUser, setCurrentUser] = useState({ name: "", about: "", avatar: defaultAvatarPic });
@@ -109,6 +112,7 @@ function App() {
     setEditAvatarPopupOpen(false);
     setPopupWithImageOpen(false);
     setConfirmationPopupOpen(false);
+    setInfoTooltipOpen(false);
     setSelectedCard({});
   }
 
@@ -173,17 +177,20 @@ function App() {
               path="/"
               element={
                 loggedIn ? (
-                  <Main
-                    loggedIn={loggedIn}
-                    onEditAvatar={handleEditAvatarClick}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    onDeleteBtnClick={handleDeletBtnClick}
-                    onCardDelete={handleCardDelete}
-                    cards={cards}
-                  />
+                  <>
+                    <Main
+                      loggedIn={loggedIn}
+                      onEditAvatar={handleEditAvatarClick}
+                      onEditProfile={handleEditProfileClick}
+                      onAddPlace={handleAddPlaceClick}
+                      onCardClick={handleCardClick}
+                      onCardLike={handleCardLike}
+                      onDeleteBtnClick={handleDeletBtnClick}
+                      onCardDelete={handleCardDelete}
+                      cards={cards}
+                    />
+                    <Footer />
+                  </>
                 ) : (
                   <Navigate to="/sign-in" replace />
                 )
@@ -196,9 +203,9 @@ function App() {
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-
-          <Footer />
         </div>
+
+        <InfoTooltip isOpen={true} onClose={closeAllPopups} />
 
         <RenderLoadingContext.Provider value={isLoading}>
           <EditProfilePopup
