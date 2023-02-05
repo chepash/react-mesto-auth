@@ -1,0 +1,22 @@
+.navbar {
+  margin: 7px 0 0 0;
+  padding: 0;
+
+  display: flex;
+  column-gap: 24px;
+}
+
+/* плавное появление отступа справа у меню
+При этом не затрагиваем белый border всего header*/
+/* 27px + 880px + 27px = 934px*/
+@media screen and (max-width: 934px) {
+  .navbar {
+    padding-right: calc((934px - 100vw) / 2); /* от 0 до 27*/
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .navbar {
+    padding-right: 27px;
+  }
+}

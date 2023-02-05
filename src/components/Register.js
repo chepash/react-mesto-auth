@@ -1,5 +1,3 @@
-import { useEffect, useContext } from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 
 import Input from "./Input";
@@ -11,18 +9,12 @@ function Register({ handleRegister, handleShowInfoTooltip }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("values : ", values);
-    handleRegister(values)
-      .then(() => {
-        // setMessage("");
-      })
-      .catch((error) => {
-        handleShowInfoTooltip(false);
-        console.log("error : ", error);
-      });
+    handleRegister(values).catch(() => {
+      handleShowInfoTooltip(false);
+    });
   }
   return (
-    <main className="content section section_size_narrow page__content">
+    <main className="content section section_size_narrow">
       <form
         action="some_URL"
         method="get"

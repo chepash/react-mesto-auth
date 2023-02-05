@@ -5,15 +5,29 @@ import Input from "./Input";
 
 import { useFormWithValidation } from "./useFormWithValidation";
 
-function Login() {
+function Login({ handleLogin }) {
+  const currentUser = useContext(CurrentUserContext);
+
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!isValid) {
+      return;
+    }
+
+    handleLogin(values)
+      .then(() => {
+        resetForm();
+      })
+      .catch((error) => {
+        console.log("Неправильный логин или пароль : ", error);
+      });
   }
 
   return (
-    <main className="content section section_size_narrow page__content">
+    <main className="content section section_size_narrow">
       <form
         action="some_URL"
         method="get"
@@ -27,10 +41,10 @@ function Login() {
           <Input
             type="email"
             placeholder="Email"
-            value={values.login || ""}
-            error={errors.login}
+            value={values.email || ""}
+            error={errors.email}
             onChange={handleChange}
-            name="login"
+            name="email"
             additionalClassName="form__input_type_account"
             additionalErrorClassName="form__error_type_account"
             minLength="2"

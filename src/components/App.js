@@ -17,6 +17,7 @@ import defaultAvatarPic from "../images/default_profile_pic.jpg";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmationPopup from "./ConfirmationPopup";
 import InfoTooltip from "./InfoTooltip";
+import ProtectedRoute from "./ProtectedRoute";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { RenderLoadingContext } from "../contexts/RenderLoadingContext";
@@ -32,7 +33,12 @@ function App() {
 
   const [selectedCard, setSelectedCard] = useState({});
 
-  const [currentUser, setCurrentUser] = useState({ name: "", about: "", avatar: defaultAvatarPic });
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    about: "",
+    _id: "",
+    avatar: defaultAvatarPic,
+  });
   //важно указать у currentUser начальные значения name, about,
   //иначе реакт будет ругаться про начальные значения null или undefined для управляемых инпутов
   const [loggedIn, setLoggedIn] = useState(false);
@@ -43,22 +49,76 @@ function App() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   Promise.all([api.getUserInfo(), api.getCardList()])
-  //     .then(([user, cards]) => {
-  //       setCurrentUser(user);
-  //       setCards(cards);
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
-  //     });
-  // }, []);
+  useEffect(() => {
+    tokenCheck()
+      .then(() => {
+        if (loggedIn) {
+          Promise.all([api.getUserInfo(), api.getCardList()])
+            .then(([user, cards]) => {
+              setCurrentUser({
+                ...currentUser,
+                name: user.name,
+                about: user.about,
+                _id: user._id,
+                avatar: user.avatar,
+              });
+              setCards(cards);
+            })
+            .then(() => console.log("currentUser after gettingCards : ", currentUser))
+            .catch((err) => {
+              console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка ошибка проверки jwt: ${err}`);
+      });
+  }, [loggedIn]);
 
   function handleRegister({ email, password }) {
     return authApi.register(email, password).then(() => {
       handleShowInfoTooltip(true);
       navigate("/login");
     });
+  }
+
+  function handleLogin({ email, password }) {
+    return authApi
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("email", email);
+          setLoggedIn(true);
+          navigate("/");
+        }
+      })
+      .then(() => console.log("currentUser after handleLogin : ", currentUser));
+  }
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      return authApi.getContent(jwt).then(() => {
+        setLoggedIn(true);
+        navigate("/");
+      });
+    } else {
+      return Promise.resolve(jwt);
+    }
+  }
+
+  function resetCurrentUserData() {
+    setCurrentUser({
+      name: "",
+      about: "",
+      _id: "",
+      avatar: defaultAvatarPic,
+    });
+  }
+
+  function resetLoggedIn() {
+    setLoggedIn(false);
   }
 
   function handleShowInfoTooltip(isRegOk) {
@@ -135,8 +195,8 @@ function App() {
     setLoading(true);
     api
       .sendUserInfo(profileName, about)
-      .then((userDataFromServer) => {
-        setCurrentUser(userDataFromServer);
+      .then((userData) => {
+        setCurrentUser({ ...currentUser, ...userData });
       })
       .then(() => {
         closeAllPopups();
@@ -153,8 +213,8 @@ function App() {
     setLoading(true);
     api
       .sendUserAvatar(avatarLink)
-      .then((userDataFromServer) => {
-        setCurrentUser(userDataFromServer);
+      .then((userData) => {
+        setCurrentUser({ ...currentUser, ...userData });
         closeAllPopups();
       })
       .catch((err) => {
@@ -185,34 +245,32 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__container">
-          <Header loggedIn={loggedIn} />
+          <Header
+            loggedIn={loggedIn}
+            resetCurrentUserData={resetCurrentUserData}
+            resetLoggedIn={resetLoggedIn}
+          />
 
           <Routes>
             <Route
               path="/"
               element={
-                loggedIn ? (
-                  <>
-                    <Main
-                      loggedIn={loggedIn}
-                      onEditAvatar={handleEditAvatarClick}
-                      onEditProfile={handleEditProfileClick}
-                      onAddPlace={handleAddPlaceClick}
-                      onCardClick={handleCardClick}
-                      onCardLike={handleCardLike}
-                      onDeleteBtnClick={handleDeletBtnClick}
-                      onCardDelete={handleCardDelete}
-                      cards={cards}
-                    />
-                    <Footer />
-                  </>
-                ) : (
-                  <Navigate to="/sign-in" replace />
-                )
+                <ProtectedRoute
+                  loggedIn={loggedIn}
+                  onEditAvatar={handleEditAvatarClick}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  onDeleteBtnClick={handleDeletBtnClick}
+                  onCardDelete={handleCardDelete}
+                  cards={cards}
+                  component={Main}
+                />
               }
             />
 
-            <Route path="/sign-in" element={<Login />} />
+            <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
 
             <Route
               path="/sign-up"
@@ -226,6 +284,8 @@ function App() {
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+
+          {loggedIn && <Footer />}
         </div>
 
         <InfoTooltip

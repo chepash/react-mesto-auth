@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PopupWithForm from "./PopupWithForm";
 import successLogo from "../images/sign-up_success.svg";
 import failLogo from "../images/sign-up_fail.svg";
 
