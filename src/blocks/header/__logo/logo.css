@@ -2,7 +2,7 @@
   margin-bottom: 40px;
 }
 
- @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .header__logo {
     width: 103.74px; /* точные значения из мкета */
     height: 24.4px;
@@ -15,7 +15,7 @@
 /* 27px + 880px + 27px = 934px*/
 @media screen and (max-width: 934px) {
   .header__logo {
-    padding-left: calc((934px - 100vw)/2); /* от 0 до 27*/
+    padding-left: calc((934px - 100vw) / 2); /* от 0 до 27*/
   }
 }
 

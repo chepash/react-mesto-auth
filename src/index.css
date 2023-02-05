@@ -5,6 +5,7 @@
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/logo.css);
+@import url(./blocks/header/__toggle/header__toggle.css);
 
 @import url(./blocks/navbar/navbar.css);
 @import url(./blocks/navbar/__text/navbar__text.css);
@@ -64,6 +65,8 @@
 
 /* кнопки */
 @import url(./blocks/button/button.css);
+@import url(./blocks/button/_type/button_type_hamburger.css);
+@import url(./blocks/button/__part/button__part.css);
 @import url(./blocks/button/_type/button_type_edit.css);
 @import url(./blocks/button/_type/button_type_add.css);
 @import url(./blocks/button/_type/button_type_like.css);

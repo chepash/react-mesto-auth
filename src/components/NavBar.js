@@ -1,8 +1,8 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function NavBar({ loggedIn, resetCurrentUserData, resetLoggedIn }) {
+function NavBar({ loggedIn, resetLoggedIn }) {
   const currentUser = useContext(CurrentUserContext);
   const navigate = useNavigate();
 

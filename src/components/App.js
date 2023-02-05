@@ -53,21 +53,21 @@ function App() {
     tokenCheck()
       .then(() => {
         if (loggedIn) {
-          Promise.all([api.getUserInfo(), api.getCardList()])
-            .then(([user, cards]) => {
-              setCurrentUser({
-                ...currentUser,
-                name: user.name,
-                about: user.about,
-                _id: user._id,
-                avatar: user.avatar,
-              });
-              setCards(cards);
-            })
-            .then(() => console.log("currentUser after gettingCards : ", currentUser))
-            .catch((err) => {
-              console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
-            });
+          // Promise.all([api.getUserInfo(), api.getCardList()])
+          //   .then(([user, cards]) => {
+          //     setCurrentUser({
+          //       ...currentUser,
+          //       name: user.name,
+          //       about: user.about,
+          //       _id: user._id,
+          //       avatar: user.avatar,
+          //     });
+          //     setCards(cards);
+          //   })
+          //   .then(() => console.log("currentUser after gettingCards : ", currentUser))
+          //   .catch((err) => {
+          //     console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
+          //   });
         }
       })
       .catch((err) => {
