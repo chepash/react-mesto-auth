@@ -1,11 +1,11 @@
-@media screen and (min-width: 769px) {
-  .button_type_hamburger {
-    display: none;
-  }
+.button_type_hamburger {
+  display: none;
 }
 
 @media screen and (max-width: 768px) {
   .button_type_hamburger {
+    display: block;
+    align-self: center;
     padding-right: 27px;
   }
 }

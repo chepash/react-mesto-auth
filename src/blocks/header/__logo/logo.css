@@ -24,3 +24,10 @@
     padding-left: 27px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .header__logo {
+    margin: 0;
+    align-self: center;
+  }
+}

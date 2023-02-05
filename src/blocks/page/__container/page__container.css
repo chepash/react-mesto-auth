@@ -14,14 +14,16 @@
 
 @media screen and (max-width: 768px) {
   .page__container {
-    padding-top: 36px;
+    /* padding-top: 36px; */
+    padding-top: 0;
     padding-bottom: 48px;
   }
 }
 
 @media screen and (max-width: 400px) {
   .page__container {
-    padding-top: 28px;
+    /* padding-top: 28px; */
+    padding-top: 0;
     padding-bottom: 36px;
   }
 }
