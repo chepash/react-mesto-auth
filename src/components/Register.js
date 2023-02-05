@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-
+import { useEffect, useContext } from "react";
 import Input from "./Input";
-
+import { RenderLoadingContext } from "../contexts/RenderLoadingContext";
 import { useFormWithValidation } from "./useFormWithValidation";
 
-function Register({ handleRegister, handleShowInfoTooltip }) {
+function Register({ handleRegister }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+
+  const isLoading = useContext(RenderLoadingContext);
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleRegister(values).catch(() => {
-      handleShowInfoTooltip(false);
-    });
+    handleRegister(values);
   }
   return (
     <main className="content section section_size_narrow">
@@ -54,12 +54,20 @@ function Register({ handleRegister, handleShowInfoTooltip }) {
           />
         </div>
 
-        <button
-          type="submit"
-          className={"button button_type_submit button_color_white"}
-          disabled={false}>
-          Зарегистрироваться
-        </button>
+        {!isLoading && (
+          <button
+            type="submit"
+            className={`button button_type_submit button_color_white`}
+            disabled={!isValid}>
+            Зарегистрироваться
+          </button>
+        )}
+        {isLoading && (
+          <button type="submit" className="button button_type_submit button_color_white" disabled>
+            Регистрация...
+          </button>
+        )}
+
         <p className="form__text">
           Уже зарегистрированы?{" "}
           <Link className="form__link" to="/sign-in">

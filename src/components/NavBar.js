@@ -29,17 +29,16 @@ function NavBar({ loggedIn, resetCurrentUserData, resetLoggedIn }) {
           <NavLink
             className={({ isActive }) => `navbar__link ${isActive ? "navbar__link_hidden" : ""}`}
             to="/sign-up">
-            Зарегистрироваться
+            Регистрация
           </NavLink>
         </>
       )}
-      {loggedIn && (
-        <button
-          onClick={signOut}
-          className={`navbar__button navbar__link ${!loggedIn ? "navbar__link_hidden" : ""}`}>
-          Выйти
-        </button>
-      )}
+
+      <button
+        onClick={signOut}
+        className={`navbar__link button navbar__button ${!loggedIn ? "navbar__link_hidden" : ""}`}>
+        Выйти
+      </button>
     </nav>
   );
 }

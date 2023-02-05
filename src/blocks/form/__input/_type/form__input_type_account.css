@@ -1,6 +1,7 @@
 .form__input_type_account {
   color: #cccccc;
   border-bottom: 2px solid #cccccc;
+  padding: 0;
 }
 
 .form__input_type_account::placeholder {

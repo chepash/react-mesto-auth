@@ -76,24 +76,43 @@ function App() {
   }, [loggedIn]);
 
   function handleRegister({ email, password }) {
-    return authApi.register(email, password).then(() => {
-      handleShowInfoTooltip(true);
-      navigate("/login");
-    });
+    setLoading(true);
+
+    authApi
+      .register(email, password)
+      .then(() => {
+        handleShowInfoTooltip(true);
+        navigate("/login");
+      })
+      .catch(() => {
+        handleShowInfoTooltip(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
-  function handleLogin({ email, password }) {
+  function handleLogin({ email, password }, resetForm) {
+    setLoading(true);
+
     return authApi
       .authorize(email, password)
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("email", email);
+          resetForm();
           setLoggedIn(true);
           navigate("/");
         }
       })
-      .then(() => console.log("currentUser after handleLogin : ", currentUser));
+      .then(() => console.log("currentUser after handleLogin : ", currentUser))
+      .catch((error) => {
+        console.log("Неправильный логин или пароль: ", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   function tokenCheck() {
@@ -244,57 +263,49 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <div className="page__container">
-          <Header
-            loggedIn={loggedIn}
-            resetCurrentUserData={resetCurrentUserData}
-            resetLoggedIn={resetLoggedIn}
+        <RenderLoadingContext.Provider value={isLoading}>
+          <div className="page__container">
+            <Header
+              loggedIn={loggedIn}
+              resetCurrentUserData={resetCurrentUserData}
+              resetLoggedIn={resetLoggedIn}
+            />
+
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute
+                    loggedIn={loggedIn}
+                    onEditAvatar={handleEditAvatarClick}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    onDeleteBtnClick={handleDeletBtnClick}
+                    onCardDelete={handleCardDelete}
+                    cards={cards}
+                    component={Main}
+                  />
+                }
+              />
+
+              <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
+
+              <Route path="/sign-up" element={<Register handleRegister={handleRegister} />} />
+
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+
+            {loggedIn && <Footer />}
+          </div>
+
+          <InfoTooltip
+            isOpen={isInfoTooltipState.isOpen}
+            isRegOk={isInfoTooltipState.isRegOk}
+            onClose={closeAllPopups}
           />
 
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute
-                  loggedIn={loggedIn}
-                  onEditAvatar={handleEditAvatarClick}
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onCardClick={handleCardClick}
-                  onCardLike={handleCardLike}
-                  onDeleteBtnClick={handleDeletBtnClick}
-                  onCardDelete={handleCardDelete}
-                  cards={cards}
-                  component={Main}
-                />
-              }
-            />
-
-            <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
-
-            <Route
-              path="/sign-up"
-              element={
-                <Register
-                  handleRegister={handleRegister}
-                  handleShowInfoTooltip={handleShowInfoTooltip}
-                />
-              }
-            />
-
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-
-          {loggedIn && <Footer />}
-        </div>
-
-        <InfoTooltip
-          isOpen={isInfoTooltipState.isOpen}
-          isRegOk={isInfoTooltipState.isRegOk}
-          onClose={closeAllPopups}
-        />
-
-        <RenderLoadingContext.Provider value={isLoading}>
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
@@ -319,10 +330,10 @@ function App() {
             card={selectedCard}
             onCardDelete={handleCardDelete}
           />
-        </RenderLoadingContext.Provider>
 
-        {/* popup просмотра изображения */}
-        <ImagePopup card={selectedCard} isOpen={isPopupWithImageOpen} onClose={closeAllPopups} />
+          {/* popup просмотра изображения */}
+          <ImagePopup card={selectedCard} isOpen={isPopupWithImageOpen} onClose={closeAllPopups} />
+        </RenderLoadingContext.Provider>
       </CurrentUserContext.Provider>
     </>
   );

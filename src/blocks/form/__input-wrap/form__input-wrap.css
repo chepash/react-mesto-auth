@@ -1,8 +1,4 @@
 .form__input-wrap {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  max-height: max-content;
   margin: 0;
   padding: 0;
 }

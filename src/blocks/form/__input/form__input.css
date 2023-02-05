@@ -1,8 +1,4 @@
 .form__input {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-
   display: block;
   margin: 0;
   padding: 0 0 8px 0;
@@ -25,7 +21,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.21;
-  color: #C4C4C4;
+  color: #c4c4c4;
 }
 
 .form__input:focus {

@@ -1,14 +1,13 @@
-import { useEffect, useContext } from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 import Input from "./Input";
-
+import { RenderLoadingContext } from "../contexts/RenderLoadingContext";
 import { useFormWithValidation } from "./useFormWithValidation";
 
 function Login({ handleLogin }) {
-  const currentUser = useContext(CurrentUserContext);
-
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+
+  const isLoading = useContext(RenderLoadingContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -17,13 +16,7 @@ function Login({ handleLogin }) {
       return;
     }
 
-    handleLogin(values)
-      .then(() => {
-        resetForm();
-      })
-      .catch((error) => {
-        console.log("Неправильный логин или пароль : ", error);
-      });
+    handleLogin(values, resetForm);
   }
 
   return (
@@ -67,12 +60,19 @@ function Login({ handleLogin }) {
           />
         </div>
 
-        <button
-          type="submit"
-          className={"button button_type_submit button_color_white"}
-          disabled={false}>
-          Войти
-        </button>
+        {!isLoading && (
+          <button
+            type="submit"
+            className={"button button_type_submit button_color_white"}
+            disabled={!isValid}>
+            Войти
+          </button>
+        )}
+        {isLoading && (
+          <button type="submit" className="button button_type_submit button_color_white" disabled>
+            Авторизация...
+          </button>
+        )}
       </form>
     </main>
   );
