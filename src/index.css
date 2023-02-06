@@ -57,8 +57,10 @@
 @import url(./blocks/form/__inputs-container/_type/form__inputs-container_type_account.css);
 @import url(./blocks/form/__input-wrap/form__input-wrap.css);
 @import url(./blocks/form/__input/form__input.css);
-@import url(./blocks/form/__input/_type/form__input_type_error.css);
+@import url(./blocks/form/__input/_type/form__input_type_popup.css);
 @import url(./blocks/form/__input/_type/form__input_type_account.css);
+@import url(./blocks/form/__input/_type/form__input_type_error.css);
+
 @import url(./blocks/form/__error/form__error.css);
 @import url(./blocks/form/__error/_visible/form__error_visible.css);
 @import url(./blocks/form/__error/_type/form__error_type_account.css);
@@ -67,18 +69,18 @@
 
 /* кнопки */
 @import url(./blocks/button/button.css);
-@import url(./blocks/button/_type/button_type_hamburger.css);
 @import url(./blocks/button/__part/button__part.css);
+@import url(./blocks/button/_type/button_type_hamburger.css);
 @import url(./blocks/button/_type/button_type_edit.css);
 @import url(./blocks/button/_type/button_type_add.css);
 @import url(./blocks/button/_type/button_type_like.css);
-@import url(./blocks/button/_active/button_active.css);
 @import url(./blocks/button/_type/button_type_delete.css);
-@import url(./blocks/button/_hidden/button_hidden.css);
 @import url(./blocks/button/_type/button_type_submit.css);
-@import url(./blocks/button/_disabled/button_disabled.css);
 @import url(./blocks/button/_type/button_type_close.css);
 @import url(./blocks/button/_color/button_color_white.css);
+@import url(./blocks/button/_active/button_active.css);
+@import url(./blocks/button/_hidden/button_hidden.css);
+@import url(./blocks/button/_disabled/button_disabled.css);
 
 /* блок для обнуления стилей и задавания геомерии нектоторым секциям */
 @import url(./blocks/section/section.css); /*box-sizing: border-box*/

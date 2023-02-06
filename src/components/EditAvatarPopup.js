@@ -28,6 +28,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
             <Input
               type="url"
               placeholder="Ссылка на картинку"
+              additionalClassName="form__input_type_popup"
               value={values.avatarLink || ""}
               error={errors.avatarLink}
               onChange={handleChange}

@@ -28,6 +28,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             <Input
               type="text"
               placeholder="Название"
+              additionalClassName="form__input_type_popup"
               value={values.placeName || ""}
               error={errors.placeName}
               onChange={handleChange}
@@ -40,6 +41,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             <Input
               type="url"
               placeholder="Ссылка на картинку"
+              additionalClassName="form__input_type_popup"
               value={values.placeLink || ""}
               error={errors.placeLink}
               onChange={handleChange}
