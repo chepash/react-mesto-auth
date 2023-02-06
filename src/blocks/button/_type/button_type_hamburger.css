@@ -18,19 +18,15 @@
     padding: 0;
     width: min-content;
 
-    align-self: center;
-    justify-self: right;
+    position: absolute;
+    z-index: 5;
+    top: 35px;
+    right: 30px;
+    transition: all 0.2s ease-in;
   }
 }
 
 .button_type_hamburger:hover {
   opacity: 0.6;
   transition: 0.2s ease-in-out;
-}
-
-@media screen and (max-width: 428px) {
-  .button_type_hamburger {
-    top: 24px;
-    left: 16px;
-  }
 }

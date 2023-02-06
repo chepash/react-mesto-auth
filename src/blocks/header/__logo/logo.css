@@ -1,20 +1,6 @@
 .header__logo {
-  margin-bottom: 40px;
-}
-
-/* плавное появление отступа слева у логотипа
-При этом не затрагиваем белый border всего header*/
-/* 27px + 880px + 27px = 934px*/
-@media screen and (max-width: 934px) {
-  .header__logo {
-    padding-left: calc((934px - 100vw) / 2); /* от 0 до 27*/
-  }
-}
-
-@media screen and (max-width: 880px) {
-  .header__logo {
-    padding-left: 0;
-  }
+  margin: 0 0 40px 0;
+  padding: 0;
 }
 
 @media screen and (max-width: 768px) {

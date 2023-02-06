@@ -19,6 +19,8 @@ import ConfirmationPopup from "./ConfirmationPopup";
 import InfoTooltip from "./InfoTooltip";
 import ProtectedRoute from "./ProtectedRoute";
 
+import HamburgerButton from "./HamburgerButton";
+
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { RenderLoadingContext } from "../contexts/RenderLoadingContext";
 
@@ -39,7 +41,7 @@ function App() {
     _id: "",
     avatar: defaultAvatarPic,
   });
-  //важно указать у currentUser начальные значения name, about,
+  //важно указать у currentUser начальные значения всех полей используемых в приложении
   //иначе реакт будет ругаться про начальные значения null или undefined для управляемых инпутов
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -53,21 +55,21 @@ function App() {
     tokenCheck()
       .then(() => {
         if (loggedIn) {
-          // Promise.all([api.getUserInfo(), api.getCardList()])
-          //   .then(([user, cards]) => {
-          //     setCurrentUser({
-          //       ...currentUser,
-          //       name: user.name,
-          //       about: user.about,
-          //       _id: user._id,
-          //       avatar: user.avatar,
-          //     });
-          //     setCards(cards);
-          //   })
-          //   .then(() => console.log("currentUser after gettingCards : ", currentUser))
-          //   .catch((err) => {
-          //     console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
-          //   });
+          Promise.all([api.getUserInfo(), api.getCardList()])
+            .then(([user, cards]) => {
+              setCurrentUser({
+                ...currentUser,
+                name: user.name,
+                about: user.about,
+                _id: user._id,
+                avatar: user.avatar,
+              });
+              setCards(cards);
+            })
+            .then(() => console.log("currentUser after gettingCards : ", currentUser))
+            .catch((err) => {
+              console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
+            });
         }
       })
       .catch((err) => {
@@ -265,6 +267,7 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <RenderLoadingContext.Provider value={isLoading}>
           <div className="page__container">
+            {loggedIn && <HamburgerButton />}
             <Header
               loggedIn={loggedIn}
               resetCurrentUserData={resetCurrentUserData}

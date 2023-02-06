@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import successLogo from "../images/sign-up_success.svg";
 import failLogo from "../images/sign-up_fail.svg";
 

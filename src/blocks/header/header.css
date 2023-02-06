@@ -6,23 +6,24 @@
   flex: 0; /* для липкого хэдера */
 
   display: grid;
-  /* flex-direction: row; */
   grid-template-columns: min-content min-content;
   justify-content: space-between;
   align-items: flex-start;
+
+  transition: transform 0.2s ease-in;
+}
+
+/* плавное появление отступа(от 0px до 27px) по бокам у элементов хедера
+При этом не затрагиваем белый border всего header*/
+/* 27px + 880px + 27px = 934px*/
+@media screen and (max-width: 934px) {
+  .header {
+    padding: 0 calc((934px - 100vw) / 2) 0;
+  }
 }
 
 @media screen and (max-width: 880px) {
   .header {
-    padding: 0 27px 0 27px;
+    padding: 0 27px 0;
   }
 }
-
-/* @media screen and (max-width: 768px) {
-  .header {
-    display: grid;
-
-    grid-template-columns: min-content min-content;
-    grid-template-rows: min-content 83px;
-  }
-} */

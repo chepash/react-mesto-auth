@@ -2,12 +2,14 @@
 @import url(./vendor/fonts/fonts.css);
 
 @import url(./blocks/page/page.css);
+@import url(./blocks/page/__toggle/page__toggle.css);
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/logo.css);
-@import url(./blocks/header/__toggle/header__toggle.css);
 
 @import url(./blocks/navbar/navbar.css);
+@import url(./blocks/navbar/_type/navbar_type_mobile.css);
+@import url(./blocks/navbar/_hidden/navbar_hidden.css);
 @import url(./blocks/navbar/__text/navbar__text.css);
 @import url(./blocks/navbar/__link/navbar__link.css);
 @import url(./blocks/navbar/__link/_hidden/navbar__link_hidden.css);
@@ -88,7 +90,3 @@
 @import url(./blocks/page/__list/page__list.css); /*переопредеяем стили всех возможных списков*/
 @import url(./blocks/content/__section/content__section.css); /*оцентровка и ширина 100% секций внутри блока content */
 @import url(./blocks/popup/__close/popup__close.css); /* позиционирование кнопки close */
-
-/* * {
-  outline: 1px solid #f00 !important;
-} */

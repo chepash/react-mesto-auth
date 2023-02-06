@@ -5,23 +5,6 @@
 
   display: grid;
   grid-template-columns: min-content min-content;
-  /* column-gap: 24px; */
-  /* row-gap: 18px; */
-}
-
-/* плавное появление отступа справа у меню
-При этом не затрагиваем белый border всего header*/
-/* 27px + 880px + 27px = 934px*/
-@media screen and (max-width: 934px) {
-  .navbar {
-    padding-right: calc((934px - 100vw) / 2); /* от 0 до 27*/
-  }
-}
-
-@media screen and (max-width: 880px) {
-  .navbar {
-    padding: 0;
-  }
 }
 
 @media screen and (max-width: 768px) {
@@ -30,40 +13,5 @@
     width: 100%;
 
     align-self: center;
-  }
-}
-
-.navbar_type_mobile {
-  width: 100%;
-  padding: 40px 0 40px 0;
-  grid-template-columns: min-content min-content;
-  justify-content: center;
-  justify-items: center;
-  border-bottom: 1px solid #54545470;
-}
-
-@media screen and (min-width: 769px) {
-  .navbar_type_mobile {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .navbar_type_mobile {
-    justify-content: center;
-    grid-template-columns: min-content;
-    row-gap: 18px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .navbar_hidden {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .navbar_hidden {
-    display: none;
   }
 }

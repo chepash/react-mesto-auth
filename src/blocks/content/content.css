@@ -8,6 +8,7 @@
   grid-template-columns: auto;
   row-gap: 50px;
 
+  transition: transform 0.2s ease-in;
 
   flex: 1; /* для липкого футера и хэдэра независимо от колтчества контента на странице */
 }
