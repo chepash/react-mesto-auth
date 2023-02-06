@@ -5,17 +5,24 @@
   border-bottom: 1px solid #54545470;
   flex: 0; /* для липкого хэдера */
 
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  /* flex-direction: row; */
+  grid-template-columns: min-content min-content;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 880px) {
+  .header {
+    padding: 0 27px 0 27px;
+  }
+}
+
+/* @media screen and (max-width: 768px) {
   .header {
     display: grid;
 
     grid-template-columns: min-content min-content;
     grid-template-rows: min-content 83px;
   }
-}
+} */

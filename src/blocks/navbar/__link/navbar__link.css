@@ -19,15 +19,15 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 768px) {
-  .header__link {
+/* @media screen and (max-width: 768px) {
+  .navbar__link {
     font-size: 16px;
     line-height: 1.21;
   }
 }
 
 @media screen and (max-width: 550px) {
-  .header__link {
+  .navbar__link {
     font-size: 14px;
   }
-}
+} */

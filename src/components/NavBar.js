@@ -16,29 +16,30 @@ function NavBar({ loggedIn, resetLoggedIn }) {
   }
 
   return (
-    <nav className="navbar">
-      <p className="navbar__text">{email ? email : ""}</p>
-
+    <nav className={`navbar ${loggedIn ? "navbar_hidden" : ""}`}>
       {!loggedIn && (
         <>
           <NavLink
-            className={({ isActive }) => `navbar__link ${isActive ? "navbar__link_hidden" : ""}`}
+            className={({ isActive }) => `navbar__link${isActive ? " navbar__link_hidden" : ""}`}
             to="/sign-in">
             Войти
           </NavLink>
           <NavLink
-            className={({ isActive }) => `navbar__link ${isActive ? "navbar__link_hidden" : ""}`}
+            className={({ isActive }) => `navbar__link${isActive ? " navbar__link_hidden" : ""}`}
             to="/sign-up">
             Регистрация
           </NavLink>
         </>
       )}
 
-      <button
-        onClick={signOut}
-        className={`navbar__link button navbar__button ${!loggedIn ? "navbar__link_hidden" : ""}`}>
-        Выйти
-      </button>
+      {loggedIn && (
+        <>
+          <p className="navbar__text">{email ? email : ""}</p>
+          <button onClick={signOut} className={`navbar__link button navbar__button`}>
+            Выйти
+          </button>
+        </>
+      )}
     </nav>
   );
 }

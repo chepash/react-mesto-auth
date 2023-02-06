@@ -1,11 +1,12 @@
 .navbar {
   margin: 7px 0 0 0;
   padding: 0;
+  width: min-content;
 
   display: grid;
   grid-template-columns: min-content min-content;
-  column-gap: 24px;
-  row-gap: 18px;
+  /* column-gap: 24px; */
+  /* row-gap: 18px; */
 }
 
 /* плавное появление отступа справа у меню
@@ -19,28 +20,50 @@
 
 @media screen and (max-width: 880px) {
   .navbar {
-    padding-right: 27px;
+    padding: 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .navbar {
     margin: 0;
-    padding: 40px 0 40px 0;
     width: 100%;
 
-    border-bottom: 1px solid #54545470;
-    grid-column-start: 1;
-    grid-column-end: -1;
-    grid-row-start: 1;
+    align-self: center;
+  }
+}
 
-    justify-content: center;
+.navbar_type_mobile {
+  width: 100%;
+  padding: 40px 0 40px 0;
+  grid-template-columns: min-content min-content;
+  justify-content: center;
+  justify-items: center;
+  border-bottom: 1px solid #54545470;
+}
+
+@media screen and (min-width: 769px) {
+  .navbar_type_mobile {
+    display: none;
   }
 }
 
 @media screen and (max-width: 540px) {
-  .navbar {
+  .navbar_type_mobile {
+    justify-content: center;
     grid-template-columns: min-content;
-    justify-items: center;
+    row-gap: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar_hidden {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar_hidden {
+    display: none;
   }
 }
