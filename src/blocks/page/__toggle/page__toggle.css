@@ -5,7 +5,7 @@
 }
 
 .page__toggle:checked + .button_type_hamburger .top-bun {
-  width: 20px;
+  width: 24px;
   top: 8px;
   transform: rotateZ(45deg);
 }
@@ -14,7 +14,7 @@
   transform: rotate(45deg);
 }
 .page__toggle:checked + .button_type_hamburger .meat {
-  width: 20px;
+  width: 24px;
   top: 0;
   transform: rotateZ(-45deg);
 }

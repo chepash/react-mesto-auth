@@ -14,6 +14,7 @@
 @import url(./blocks/navbar/__link/navbar__link.css);
 @import url(./blocks/navbar/__link/_hidden/navbar__link_hidden.css);
 @import url(./blocks/navbar/__button/navbar__button.css);
+@import url(./blocks/navbar/__button/_type/navbar__button_type_mobile.css);
 
 @import url(./blocks/content/content.css);
 

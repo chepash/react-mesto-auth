@@ -18,3 +18,10 @@
   transition: opacity 0.2s ease;
   opacity: 0.6;
 }
+
+@media screen and (max-width: 540px) {
+  .navbar__link {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}

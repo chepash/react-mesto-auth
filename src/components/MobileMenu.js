@@ -16,7 +16,9 @@ function MobileMenu({ resetLoggedIn }) {
     <nav className="section navbar navbar_type_mobile">
       <p className="navbar__text">{email ? email : ""}</p>
 
-      <button onClick={signOut} className={`navbar__link button navbar__button`}>
+      <button
+        onClick={signOut}
+        className={`navbar__link button navbar__button navbar__button_type_mobile`}>
         Выйти
       </button>
     </nav>

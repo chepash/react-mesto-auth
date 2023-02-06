@@ -3,7 +3,6 @@
   display: grid;
   grid-template-columns: min-content auto auto;
   column-gap: 30px;
-
 }
 
 @media screen and (max-width: 1000px) {
@@ -12,12 +11,11 @@
   }
 }
 
-
 @media screen and (max-width: 768px) {
   .profile {
     justify-content: center;
     grid-template-columns: auto auto;
-    row-gap: 32px;
+    row-gap: 29px;
   }
 }
 
@@ -27,4 +25,3 @@
     justify-items: center;
   }
 }
-

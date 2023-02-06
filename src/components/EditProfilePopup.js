@@ -37,7 +37,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
               type="text"
               placeholder="Имя пользователя"
               additionalClassName="form__input_type_popup"
-              value={values.name || currentUser.name || ""}
+              value={values.name || ""}
               error={errors.name}
               onChange={handleChange}
               name="name"
@@ -50,7 +50,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
               type="text"
               placeholder="Деятельность"
               additionalClassName="form__input_type_popup"
-              value={values.about || currentUser.about || ""}
+              value={values.about || ""}
               error={errors.about}
               onChange={handleChange}
               name="about"

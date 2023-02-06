@@ -13,6 +13,7 @@
 
 @media screen and (max-width: 540px) {
   .form_type_account {
+    margin-top: 41px;
     max-width: 260px;
   }
 }
