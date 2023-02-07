@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function NavBar({ loggedIn, handleSignOut }) {
+function NavBar({ loggedIn, onSignOut }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -25,7 +25,7 @@ function NavBar({ loggedIn, handleSignOut }) {
       {loggedIn && (
         <>
           <p className="navbar__text">{currentUser.email ? currentUser.email : ""}</p>
-          <button onClick={handleSignOut} className={`navbar__link button navbar__button`}>
+          <button onClick={onSignOut} className={`navbar__link button navbar__button`}>
             Выйти
           </button>
         </>

@@ -73,9 +73,7 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    tokenCheck().catch((err) => {
-      console.log(`Ошибка ошибка проверки jwt: ${err}`);
-    });
+    tokenCheck();
   }, [loggedIn]);
 
   function handleRegister({ email, password }) {
@@ -98,7 +96,7 @@ function App() {
   function handleLogin({ email, password }, resetForm) {
     setLoading(true);
 
-    return authApi
+    authApi
       .authorize(email, password)
       .then((data) => {
         if (data.token) {
@@ -127,12 +125,15 @@ function App() {
   function tokenCheck() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      return authApi.getContent(jwt).then(() => {
-        setLoggedIn(true);
-        navigate("/");
-      });
-    } else {
-      return Promise.resolve(jwt);
+      authApi
+        .getContent(jwt)
+        .then(() => {
+          setLoggedIn(true);
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(`Ошибка ошибка проверки jwt: ${err}`);
+        });
     }
   }
 
@@ -151,15 +152,6 @@ function App() {
     setLoggedIn(false);
 
     navigate("/sign-in");
-  }
-
-  function resetCurrentUserData() {
-    setCurrentUser({
-      name: "",
-      about: "",
-      _id: "",
-      avatar: defaultAvatarPic,
-    });
   }
 
   function handleShowInfoTooltip(isRegOk) {
@@ -288,11 +280,7 @@ function App() {
         <RenderLoadingContext.Provider value={isLoading}>
           <div className="page__container">
             {loggedIn && <HamburgerButton />}
-            <Header
-              loggedIn={loggedIn}
-              resetCurrentUserData={resetCurrentUserData}
-              handleSignOut={handleSignOut}
-            />
+            <Header loggedIn={loggedIn} onSignOut={handleSignOut} />
 
             <Routes>
               <Route
@@ -354,7 +342,6 @@ function App() {
             onCardDelete={handleCardDelete}
           />
 
-          {/* popup просмотра изображения */}
           <ImagePopup card={selectedCard} isOpen={isPopupWithImageOpen} onClose={closeAllPopups} />
         </RenderLoadingContext.Provider>
       </CurrentUserContext.Provider>
