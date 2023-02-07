@@ -13,6 +13,7 @@ function ConfirmationPopup({ isOpen, onClose, card, onCardDelete }) {
           name="confirmation"
           title="Вы уверены?"
           ariaLable="Всплывающее окно: Подтвердить удаление карточки"
+          additionalFormClassName="form_type_confirmation"
           isOpen={isOpen}
           onClose={onClose}
           isValid={"true"}

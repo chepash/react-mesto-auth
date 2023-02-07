@@ -52,7 +52,10 @@ function App() {
 
   const navigate = useNavigate();
 
-  //разделил логику одного useEffect на два, вроде так правильнее
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
   useEffect(() => {
     if (loggedIn) {
       Promise.all([api.getUserInfo(), api.getCardList()])
@@ -70,10 +73,6 @@ function App() {
           console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
         });
     }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    tokenCheck();
   }, [loggedIn]);
 
   function handleRegister({ email, password }) {
@@ -127,8 +126,14 @@ function App() {
     if (jwt) {
       authApi
         .getContent(jwt)
-        .then(() => {
+        .then((res) => {
+          setCurrentUser({
+            ...currentUser,
+            email: res.data.email,
+          });
+
           setLoggedIn(true);
+
           navigate("/");
         })
         .catch((err) => {

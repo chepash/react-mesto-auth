@@ -6,6 +6,7 @@ function PopupWithForm({
   ariaLable,
   title,
   buttonSubmitText,
+  additionalFormClassName,
   isOpen,
   isValid,
   onClose,
@@ -49,7 +50,7 @@ function PopupWithForm({
           action="some_URL"
           method="get"
           onSubmit={onSubmit}
-          className="form"
+          className={"form" + (additionalFormClassName ? " " + additionalFormClassName : "")}
           name={`form_type_${name}`}
           noValidate>
           <h2 className="form__title">{title}</h2>

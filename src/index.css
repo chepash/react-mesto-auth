@@ -52,6 +52,7 @@
 /* формы */
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/_type/form_type_account.css);
+@import url(./blocks/form/_type/form_type_confirmation.css);
 @import url(./blocks/form/__title/form__title.css);
 @import url(./blocks/form/__title/_type/form__title_type_account.css);
 @import url(./blocks/form/__inputs-container/form__inputs-container.css);
