@@ -10,7 +10,7 @@
 
 - Небольшой проект Место с карточками фотографий и подписями к ним.
 - Первый опыт работы с React и использовани Хуков.
-- [Ссылка на GitHub Pages](https://chepash.github.io/mesto-react-auth/)
+- [Ссылка на GitHub Pages](https://chepash.github.io/react-mesto-auth/)
 
 **Реализованный функционал**
 

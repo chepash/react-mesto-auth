@@ -36,18 +36,10 @@ function InfoTooltip({ isOpen, isRegOk, onClose }) {
         className="button button_type_close popup__close"
         onClick={onClose}></button>
       <div className="popup__container">
-        {isRegOk && (
-          <>
-            <img src={successLogo} alt="Логотип" className="popup__logo" />
-            <h2 className="popup__text">Вы успешно зарегистрировались!</h2>
-          </>
-        )}
-        {!isRegOk && (
-          <>
-            <img src={failLogo} alt="Логотип" className="popup__logo" />
-            <h2 className="popup__text">Что-то пошло не так! Попробуйте ещё раз.</h2>
-          </>
-        )}
+        <img src={isRegOk ? successLogo : failLogo} alt="Логотип" className="popup__logo" />
+        <h2 className="popup__text">
+          {isRegOk ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."}{" "}
+        </h2>
       </div>
     </section>
   );

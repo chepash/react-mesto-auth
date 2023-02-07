@@ -1,5 +1,5 @@
 import PopupWithForm from "./PopupWithForm";
-import { useFormWithValidation } from "./useFormWithValidation";
+import { useFormWithValidation } from "../hooks/useFormWithValidation";
 import Input from "./Input";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
