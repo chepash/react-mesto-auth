@@ -1,16 +1,9 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function NavBar({ loggedIn, resetLoggedIn }) {
-  const navigate = useNavigate();
-
-  const email = localStorage.getItem("email");
-
-  function signOut() {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("email");
-    resetLoggedIn();
-    navigate("/sign-in");
-  }
+function NavBar({ loggedIn, handleSignOut }) {
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <nav className={`navbar ${loggedIn ? "navbar_hidden" : ""}`}>
@@ -31,8 +24,8 @@ function NavBar({ loggedIn, resetLoggedIn }) {
 
       {loggedIn && (
         <>
-          <p className="navbar__text">{email ? email : ""}</p>
-          <button onClick={signOut} className={`navbar__link button navbar__button`}>
+          <p className="navbar__text">{currentUser.email ? currentUser.email : ""}</p>
+          <button onClick={handleSignOut} className={`navbar__link button navbar__button`}>
             Выйти
           </button>
         </>

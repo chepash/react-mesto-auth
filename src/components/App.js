@@ -40,6 +40,7 @@ function App() {
     about: "",
     _id: "",
     avatar: defaultAvatarPic,
+    email: "",
   });
   //важно указать у currentUser начальные значения всех полей используемых в приложении
   //иначе реакт будет ругаться про начальные значения null или undefined для управляемых инпутов
@@ -51,30 +52,30 @@ function App() {
 
   const navigate = useNavigate();
 
+  //разделил логику одного useEffect на два, вроде так правильнее
   useEffect(() => {
-    tokenCheck()
-      .then(() => {
-        if (loggedIn) {
-          Promise.all([api.getUserInfo(), api.getCardList()])
-            .then(([user, cards]) => {
-              setCurrentUser({
-                ...currentUser,
-                name: user.name,
-                about: user.about,
-                _id: user._id,
-                avatar: user.avatar,
-              });
-              setCards(cards);
-            })
-            .then(() => console.log("currentUser after gettingCards : ", currentUser))
-            .catch((err) => {
-              console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
-            });
-        }
-      })
-      .catch((err) => {
-        console.log(`Ошибка ошибка проверки jwt: ${err}`);
-      });
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(), api.getCardList()])
+        .then(([user, cards]) => {
+          setCurrentUser({
+            ...currentUser,
+            name: user.name,
+            about: user.about,
+            _id: user._id,
+            avatar: user.avatar,
+          });
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(`Ошибка api getUserInfo/getCardList из promise.all: ${err}`);
+        });
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    tokenCheck().catch((err) => {
+      console.log(`Ошибка ошибка проверки jwt: ${err}`);
+    });
   }, [loggedIn]);
 
   function handleRegister({ email, password }) {
@@ -102,15 +103,21 @@ function App() {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
-          localStorage.setItem("email", email);
+
+          setCurrentUser({
+            ...currentUser,
+            email: email,
+          });
+
           resetForm();
+
           setLoggedIn(true);
+
           navigate("/");
         }
       })
-      .then(() => console.log("currentUser after handleLogin : ", currentUser))
-      .catch((error) => {
-        console.log("Неправильный логин или пароль: ", error);
+      .catch(() => {
+        handleShowInfoTooltip(false);
       })
       .finally(() => {
         setLoading(false);
@@ -129,6 +136,23 @@ function App() {
     }
   }
 
+  function handleSignOut() {
+    localStorage.removeItem("jwt");
+
+    setCurrentUser({
+      ...currentUser,
+      name: "",
+      about: "",
+      _id: "",
+      avatar: defaultAvatarPic,
+      email: "",
+    });
+
+    setLoggedIn(false);
+
+    navigate("/sign-in");
+  }
+
   function resetCurrentUserData() {
     setCurrentUser({
       name: "",
@@ -136,10 +160,6 @@ function App() {
       _id: "",
       avatar: defaultAvatarPic,
     });
-  }
-
-  function resetLoggedIn() {
-    setLoggedIn(false);
   }
 
   function handleShowInfoTooltip(isRegOk) {
@@ -271,7 +291,7 @@ function App() {
             <Header
               loggedIn={loggedIn}
               resetCurrentUserData={resetCurrentUserData}
-              resetLoggedIn={resetLoggedIn}
+              handleSignOut={handleSignOut}
             />
 
             <Routes>

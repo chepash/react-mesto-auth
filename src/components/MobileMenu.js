@@ -1,23 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function MobileMenu({ resetLoggedIn }) {
-  const navigate = useNavigate();
-
-  const email = localStorage.getItem("email");
-
-  function signOut() {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("email");
-    resetLoggedIn();
-    navigate("/sign-in");
-  }
+function MobileMenu({ handleSignOut }) {
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <nav className="section navbar navbar_type_mobile">
-      <p className="navbar__text">{email ? email : ""}</p>
+      <p className="navbar__text">{currentUser.email ? currentUser.email : ""}</p>
 
       <button
-        onClick={signOut}
+        onClick={handleSignOut}
         className={`navbar__link button navbar__button navbar__button_type_mobile`}>
         Выйти
       </button>

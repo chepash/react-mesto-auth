@@ -2,15 +2,15 @@ import logo from "../images/header_logo.svg";
 import NavBar from "./NavBar";
 import MobileMenu from "./MobileMenu";
 
-function Header({ loggedIn, resetLoggedIn }) {
+function Header({ loggedIn, handleSignOut }) {
   return (
     <>
-      {loggedIn && <MobileMenu resetLoggedIn={resetLoggedIn} />}
+      {loggedIn && <MobileMenu handleSignOut={handleSignOut} />}
 
       <header className="header section">
         <img src={logo} alt="Логотип" className="header__logo" />
 
-        <NavBar loggedIn={loggedIn} resetLoggedIn={resetLoggedIn} />
+        <NavBar loggedIn={loggedIn} handleSignOut={handleSignOut} />
       </header>
     </>
   );
