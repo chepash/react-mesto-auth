@@ -1,4 +1,5 @@
 {
+  "homepage": "https://chepash.github.io/react-mesto-auth/",
   "name": "mesto-react",
   "version": "0.1.0",
   "private": true,
@@ -20,7 +21,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://chepash.github.io/react-mesto-auth/",
   "eslintConfig": {
     "extends": [
       "react-app",
