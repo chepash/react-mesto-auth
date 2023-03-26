@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 import Input from './Input';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 import { useFormWithValidation } from '../hooks/useFormWithValidation';
 

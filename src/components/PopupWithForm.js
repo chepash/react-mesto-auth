@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { RenderLoadingContext } from '../contexts/RenderLoadingContext';
+import RenderLoadingContext from '../contexts/RenderLoadingContext';
 
 function PopupWithForm({
   name,

@@ -1,3 +1,5 @@
 import { createContext } from 'react';
 
-export const RenderLoadingContext = createContext();
+const RenderLoadingContext = createContext();
+
+export default RenderLoadingContext;

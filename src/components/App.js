@@ -23,8 +23,8 @@ import ProtectedRoute from './ProtectedRoute';
 
 import HamburgerButton from './HamburgerButton';
 
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { RenderLoadingContext } from '../contexts/RenderLoadingContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import RenderLoadingContext from '../contexts/RenderLoadingContext';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
