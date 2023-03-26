@@ -1,5 +1,5 @@
-import { useEffect, useContext } from "react";
-import { RenderLoadingContext } from "../contexts/RenderLoadingContext";
+import { useEffect, useContext } from 'react';
+import { RenderLoadingContext } from '../contexts/RenderLoadingContext';
 
 function PopupWithForm({
   name,
@@ -16,16 +16,16 @@ function PopupWithForm({
   const isLoading = useContext(RenderLoadingContext);
 
   const handleEscClose = (e) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       onClose();
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", handleEscClose);
+    document.addEventListener('keydown', handleEscClose);
 
     return () => {
-      document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener('keydown', handleEscClose);
     };
   }, [isOpen]);
 
@@ -37,22 +37,25 @@ function PopupWithForm({
 
   return (
     <section
-      className={`popup section popup_type_${name} ${isOpen ? "popup_opened" : ""}`}
+      className={`popup section popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}
       aria-label={`${ariaLable}`}
-      onClick={handlePopupOverlayClick}>
+      onClick={handlePopupOverlayClick}
+    >
       <button
         type="button"
         aria-label="Закрыть"
         className="button button_type_close popup__close"
-        onClick={onClose}></button>
+        onClick={onClose}
+      />
       <div className="popup__container">
         <form
           action="some_URL"
           method="get"
           onSubmit={onSubmit}
-          className={"form" + (additionalFormClassName ? " " + additionalFormClassName : "")}
+          className={`form${additionalFormClassName ? ` ${additionalFormClassName}` : ''}`}
           name={`form_type_${name}`}
-          noValidate>
+          noValidate
+        >
           <h2 className="form__title">{title}</h2>
 
           {children}
@@ -60,8 +63,9 @@ function PopupWithForm({
           {!isLoading && (
             <button
               type="submit"
-              className={"button button_type_submit" + (isValid ? "" : " button_disabled")}
-              disabled={!isValid}>
+              className={`button button_type_submit${isValid ? '' : ' button_disabled'}`}
+              disabled={!isValid}
+            >
               {buttonSubmitText}
             </button>
           )}

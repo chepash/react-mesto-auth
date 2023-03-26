@@ -1,7 +1,7 @@
 const cardServerApiOptions = {
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-55",
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-55',
   headers: {
-    authorization: "8abcd093-addb-4bd1-b00f-f600aa41c00a",
+    authorization: '8abcd093-addb-4bd1-b00f-f600aa41c00a',
   },
 };
 
@@ -36,38 +36,38 @@ class Api {
 
   sendNewCardInfo(name, link) {
     return fetch(`${this.baseUrl}/cards`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         authorization: this.authToken,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name,
+        link,
       }),
     }).then(this._getResponseData);
   }
 
   sendUserInfo(name, about) {
     return fetch(`${this.baseUrl}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
         authorization: this.authToken,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: name,
-        about: about,
+        name,
+        about,
       }),
     }).then(this._getResponseData);
   }
 
   sendUserAvatar(avatarUrl) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
         authorization: this.authToken,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         avatar: avatarUrl,
@@ -77,7 +77,7 @@ class Api {
 
   sendСardDeleteRequest(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         authorization: this.authToken,
       },
@@ -86,7 +86,7 @@ class Api {
 
   changeLikeCardStatus(cardId, isLikedByMe) {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
-      method: isLikedByMe ? "DELETE" : "PUT",
+      method: isLikedByMe ? 'DELETE' : 'PUT',
       headers: {
         authorization: this.authToken,
       },

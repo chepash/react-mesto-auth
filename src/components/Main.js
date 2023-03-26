@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import Card from "./Card";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useContext } from 'react';
+import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main({
   onEditAvatar,
@@ -11,7 +11,6 @@ function Main({
   onCardLike,
   onCardDelete,
   onDeleteBtnClick,
-  loggenIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -29,25 +28,24 @@ function Main({
             type="button"
             aria-label="Редактировать"
             className="button button_type_edit"
-            onClick={onEditProfile}></button>
+            onClick={onEditProfile}
+          />
         </div>
-        <button type="button" className="button button_type_add" onClick={onAddPlace}></button>
+        <button type="button" className="button button_type_add" onClick={onAddPlace} />
       </section>
 
       <section className="elements section content__section" aria-label="Фотографии">
         <ul className="elements__list page__list">
-          {cards.map((card) => {
-            return (
-              <Card
-                key={card._id}
-                card={card}
-                onCardClick={onCardClick}
-                onCardLike={onCardLike}
-                onCardDelete={onCardDelete}
-                onDeleteBtnClick={onDeleteBtnClick}
-              />
-            );
-          })}
+          {cards.map((card) => (
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+              onDeleteBtnClick={onDeleteBtnClick}
+            />
+          ))}
         </ul>
       </section>
     </main>
