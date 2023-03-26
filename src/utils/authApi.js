@@ -1,4 +1,4 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+import { BASE_URL } from './config';
 
 const getResponse = (res) => (res.ok ? res.json() : Promise.reject(new Error(`Ошибка: ${res.status}`)));
 
