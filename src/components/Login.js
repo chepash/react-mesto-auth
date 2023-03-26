@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import Input from "./Input";
-import { RenderLoadingContext } from "../contexts/RenderLoadingContext";
-import { useFormWithValidation } from "../hooks/useFormWithValidation";
+import Input from './Input';
+import RenderLoadingContext from '../contexts/RenderLoadingContext';
+import useFormWithValidation from '../hooks/useFormWithValidation';
 
 function Login({ handleLogin }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  const {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    resetForm,
+  } = useFormWithValidation();
 
   const isLoading = useContext(RenderLoadingContext);
 
@@ -26,15 +32,16 @@ function Login({ handleLogin }) {
         method="get"
         onSubmit={handleSubmit}
         className="form form_type_account"
-        name={`form_type_login`}
-        noValidate>
+        name="form_type_login"
+        noValidate
+      >
         <h2 className="form__title form__title_type_account">Вход</h2>
 
         <div className="form__inputs-container form__inputs-container_type_account">
           <Input
             type="email"
             placeholder="Email"
-            value={values.email || ""}
+            value={values.email || ''}
             error={errors.email}
             onChange={handleChange}
             name="email"
@@ -48,7 +55,7 @@ function Login({ handleLogin }) {
           <Input
             type="password"
             placeholder="Пароль"
-            value={values.password || ""}
+            value={values.password || ''}
             error={errors.password}
             onChange={handleChange}
             name="password"
@@ -63,8 +70,9 @@ function Login({ handleLogin }) {
         {!isLoading && (
           <button
             type="submit"
-            className={"button button_type_submit button_color_white"}
-            disabled={!isValid}>
+            className="button button_type_submit button_color_white"
+            disabled={!isValid}
+          >
             Войти
           </button>
         )}

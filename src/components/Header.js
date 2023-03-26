@@ -1,6 +1,6 @@
-import logo from "../images/header_logo.svg";
-import NavBar from "./NavBar";
-import MobileMenu from "./MobileMenu";
+import logo from '../images/header_logo.svg';
+import NavBar from './NavBar';
+import MobileMenu from './MobileMenu';
 
 function Header({ loggedIn, onSignOut }) {
   return (

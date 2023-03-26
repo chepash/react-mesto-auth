@@ -5,6 +5,7 @@
   min-width: 120px;
   height: 120px;
   background-size: cover;
+  object-fit: cover;
   background-position: center;
   border-radius: 50%;
 }
