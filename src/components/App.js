@@ -3,7 +3,7 @@ import {
   Routes, Route, Navigate, useNavigate,
 } from 'react-router-dom';
 
-import { api } from '../utils/api';
+import api from '../utils/api';
 import * as authApi from '../utils/authApi';
 
 import Header from './Header';
