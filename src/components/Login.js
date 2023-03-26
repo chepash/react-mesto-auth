@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import Input from './Input';
 import RenderLoadingContext from '../contexts/RenderLoadingContext';
-import { useFormWithValidation } from '../hooks/useFormWithValidation';
+import useFormWithValidation from '../hooks/useFormWithValidation';
 
 function Login({ handleLogin }) {
   const {

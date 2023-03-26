@@ -1,5 +1,5 @@
 import PopupWithForm from './PopupWithForm';
-import { useFormWithValidation } from '../hooks/useFormWithValidation';
+import useFormWithValidation from '../hooks/useFormWithValidation';
 import Input from './Input';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
