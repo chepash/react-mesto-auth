@@ -1,6 +1,4 @@
-const cardServerApiOptions = {
-  baseUrl: 'http://localhost:3000',
-};
+import { cardServerApiOptions } from './config';
 
 class Api {
   constructor(options) {
